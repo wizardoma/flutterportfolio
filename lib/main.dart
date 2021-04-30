@@ -131,28 +131,52 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget introductionSection() {
+    var container = Container(
+      child: Text(
+        description,
+        style: TextStyle(
+            height: 1.5,
+            color: !isDarkMode ? Colors.black54 : Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w400),
+      ),
+    );
+
+    return SectionWrapper(
+      title: "Hello!",
+      content: container,
+      isDarkMode: isDarkMode,
+    );
+  }
+}
+
+class SectionWrapper extends StatelessWidget {
+  final String title;
+  final bool isDarkMode;
+  final Widget content;
+
+  const SectionWrapper({Key key, this.title, this.content, this.isDarkMode})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           child: Text(
-            "Hello! ",
+            title,
             style: TextStyle(
                 color: !isDarkMode ? Colors.black54 : Colors.white,
                 fontSize: 25,
                 fontWeight: FontWeight.w400),
           ),
         ),
-        Container(
-          child: Text(
-            description,
-            style: TextStyle(
-                height: 1.5,
-                color: !isDarkMode ? Colors.black54 : Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.w400),
-          ),
+        SizedBox(
+          height: 10,
         ),
+        Container(padding: EdgeInsets.only(left: 15), child: content),
       ],
     );
   }
